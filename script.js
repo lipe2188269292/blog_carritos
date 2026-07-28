@@ -1,45 +1,61 @@
-const likes = document.querySelectorAll(".like");
+// Pesquisa
 
-likes.forEach(botao => {
+const busca=document.getElementById("buscar");
 
-    botao.addEventListener("click", function(){
+busca.addEventListener("keyup",()=>{
 
-        if(this.innerHTML==="❤️ Curtir"){
+let texto=busca.value.toLowerCase();
 
-            this.innerHTML="💖 Curtido!";
-            this.style.background="#00b894";
+document.querySelectorAll(".card").forEach(card=>{
 
-        }else{
+let nome=card.querySelector("h2").innerText.toLowerCase();
 
-            this.innerHTML="❤️ Curtir";
-            this.style.background="#ff3d3d";
-
-        }
-
-    });
+card.style.display=nome.includes(texto)?"block":"none";
 
 });
 
-const busca = document.getElementById("buscar");
+});
 
-busca.addEventListener("keyup", ()=>{
+// Curtidas
 
-    const texto = busca.value.toLowerCase();
+document.querySelectorAll(".like").forEach(botao=>{
 
-    document.querySelectorAll(".card").forEach(card=>{
+let likes=0;
 
-        const titulo = card.querySelector("h2").textContent.toLowerCase();
+botao.onclick=function(){
 
-        if(titulo.indexOf(texto)>-1){
+likes++;
 
-            card.style.display="block";
+botao.querySelector("span").innerHTML=likes;
 
-        }else{
+}
 
-            card.style.display="none";
+});
 
-        }
+// Contadores
 
-    });
+const numeros=document.querySelectorAll(".contador");
+
+numeros.forEach(numero=>{
+
+let alvo=+numero.dataset.numero;
+
+let atual=0;
+
+let tempo=setInterval(()=>{
+
+atual+=Math.ceil(alvo/100);
+
+if(atual>=alvo){
+
+atual=alvo;
+
+clearInterval(tempo);
+
+}
+
+numero.innerHTML=atual.toLocaleString("pt-BR");
+
+},20);
 
 });
