@@ -59,3 +59,18 @@ numero.innerHTML=atual.toLocaleString("pt-BR");
 },20);
 
 });
+// Modo Claro / Escuro
+
+const tema = document.getElementById("tema");
+
+tema.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark");
+
+    if (document.body.classList.contains("dark")) {
+        tema.innerHTML = "☀️ Modo Claro";
+    } else {
+        tema.innerHTML = "🌙 Modo Escuro";
+    }
+
+});
